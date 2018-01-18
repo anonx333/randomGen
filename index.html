@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="description" content="3D solar system using p5js">
+		<meta name="keywords" content="HTML,CSS,XML,JavaScript,p5js,random,random generator,generator,wheel">
+		<meta name="author" content="Ashon Shakya">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Random Generator</title>
+		<script src="p5/p5/p5.js" type="text/javascript">
+		</script>
+		<script src="sketch.js" type="text/javascript">
+		</script>
+		
+	</head>
+
+	<body>
+	<div id="main_body" style="width:300px; height:500px;background:aqua">
+		<div id="spin_canvas" style="width:300px;height:200px;background:red">
+						
+		</div>
+		<div id="item_header" style="width:300px;height:100px;background:grey">
+			<input type="text" id="new_item" value="" />
+			<button id="item_add_btn" onclick="insertItem()">Add</button>
+			<button id="spin_btn" onclick="spin()">Spin</button>
+		</div>
+		<div id="item_list_div" style="width:300px;height:auto;background:#6bbf86">
+			<ul id="item_list">
+			</ul>
+		</div>
+		
+	</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = listItem();
+		
+		function insertItem()
+		{
+			var itemvalue = [];
+			itemvalue[0] = document.getElementById("new_item").value;
+			itemvalue[1] = (Math.random() * (255 - 10)) + 10;
+			itemvalue[2] = (Math.random() * (255 - 10)) + 10;
+			itemvalue[3] = (Math.random() * (255 - 10)) + 10;
+			
+			if(itemvalue != "")
+			{
+				itemListArr.push(itemvalue);
+				listItem();
+			}
+		}
+		
+		function listItem()
+		{
+			var ulItemList = document.getElementById("item_list");
+			ulItemList.innerHTML = "";
+			for(var i = 0; i < itemListArr.length; i++)
+			{
+				var liItem = document.createElement("li");
+				liItem.innerHTML = itemListArr[i][0];
+				ulItemList.appendChild(liItem);
+			}
+		}
+		
+		function spin()
+		{
+			spin_on = true;
+			spin_speed = (Math.random() * (300 - 10)) + 10;
+		}
+		
+		function spinStop()
+		{
+			var degangle = degrees(rotangle);
+			var itemNumber = itemListArr.length;
+			var arcAngle = 360 / itemNumber;
+			
+			var itemNo = parseInt( degangle / arcAngle );
+			alert(itemNo - 1 +" >> " + itemListArr[itemNo - 1] );
+			
+		}
+	</script>
+
+</html>
