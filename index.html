@@ -32,7 +32,6 @@
 	</div>
 	</body>
 	<script type="text/javascript">
-		window.onload = listItem();
 		
 		function insertItem()
 		{
@@ -42,10 +41,11 @@
 			itemvalue[2] = (Math.random() * (255 - 10)) + 10;
 			itemvalue[3] = (Math.random() * (255 - 10)) + 10;
 			
-			if(itemvalue != "")
+			if( itemvalue[0].trim() != "")
 			{
 				itemListArr.push(itemvalue);
 				listItem();
+				document.getElementById("new_item").value = "";
 			}
 		}
 		
@@ -57,8 +57,23 @@
 			{
 				var liItem = document.createElement("li");
 				liItem.innerHTML = itemListArr[i][0];
+				var delButton = document.createElement("button");
+				delButton.innerHTML = "Delete";
+				delButton.id = "item_" + i;
+				delButton.addEventListener('click', function() {
+					removeItem(this);
+				}, false);
+
+				liItem.appendChild(delButton);
 				ulItemList.appendChild(liItem);
 			}
+		}
+
+		function removeItem(x)
+		{
+			var removeItemNo = parseInt(x.id.substr(x.id.indexOf("_") + 1));
+			itemListArr.splice(removeItemNo,1);
+			listItem();
 		}
 		
 		function spin()
