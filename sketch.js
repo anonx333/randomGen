@@ -25,7 +25,6 @@ function wheel()
 			
 			if (spin_speed < 0.002)
 			{
-				alert(1);
 				spin_on = false;
 				spin_speed = 0;
 				spinStop();
@@ -36,8 +35,16 @@ function wheel()
 		for(var i = 0; i < itemListArr.length; i ++)
 		{
 			var rangle = radians(angle);
+
 			fill(itemListArr[i][1],itemListArr[i][2],itemListArr[i][3]);
-			arc(0, 0, 95, 95, temp, temp + rangle);
+			arc(0, 0, 150, 150, temp, temp + rangle);
+			fill(255);
+			noStroke();
+			push();
+				rotate(temp + (rangle / 2));
+				text(itemListArr[i][0], 25, 5);
+			pop();
+			stroke(255);
 			temp = temp + rangle;
 		}
 
@@ -54,7 +61,9 @@ function setup(){
 function draw(){
   background(51);
   stroke(255);
+
   fill(122,122,122);
   translate(width/2, height/2);
+   rotate(degrees(180));
   wh.update();
 }
