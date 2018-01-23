@@ -75,6 +75,3 @@ function draw(){
   triangle(-70,0, -75,-2,-75,2);
 }
 
-function mouseDragged() {
- spin();
-}
