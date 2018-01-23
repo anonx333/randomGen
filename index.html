@@ -79,7 +79,8 @@
 		function spin()
 		{
 			spin_on = true;
-			spin_speed = (Math.random() * (300 - 10)) + 10;
+			spin_speed = (Math.random() * (500 - 10)) + 10;
+			spin_ratio = ((((Math.random() * 10)) / 50) + 1);
 		}
 		
 		function spinStop()
@@ -87,9 +88,16 @@
 			var degangle = degrees(rotangle);
 			var itemNumber = itemListArr.length;
 			var arcAngle = 360 / itemNumber;
-			
 			var itemNo = parseInt( degangle / arcAngle );
-			alert(itemNo - 1 +" >> " + itemListArr[itemNo - 1] );
+			var temp = 0;
+			for (var i = itemListArr.length - 1; i >= 0 ; i--)
+			{
+				if (temp == itemNo)
+				{
+					alert(itemListArr[i][0]);
+				}
+				temp++;
+			}
 			
 		}
 	</script>

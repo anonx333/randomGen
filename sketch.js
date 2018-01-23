@@ -2,6 +2,7 @@ var myCanvas;
 var itemListArr = [];
 var spin_on = false;
 var spin_speed = 0;
+var spin_ratio = 0;
 var rotangle = 0;
 var wh;
 
@@ -21,7 +22,7 @@ function wheel()
 			var rotangle_deg = degrees(rotangle) % 360;
 			rotangle = radians(rotangle_deg);
 			
-			spin_speed = spin_speed / 1.1;
+			spin_speed = spin_speed / spin_ratio;
 			
 			if (spin_speed < 0.002)
 			{
@@ -54,7 +55,7 @@ function wheel()
 function setup(){
   myCanvas = createCanvas(200,200);
   myCanvas.parent('spin_canvas');
-  frameRate(10);
+  frameRate(60);
   wh = new wheel();
 }
 
@@ -64,6 +65,16 @@ function draw(){
 
   fill(122,122,122);
   translate(width/2, height/2);
-   rotate(degrees(180));
+  rotate(radians(180));
+  push();
+   rotate(radians(180));
   wh.update();
+  pop();
+
+  fill(0,0,0);
+  triangle(-70,0, -75,-2,-75,2);
+}
+
+function mouseDragged() {
+ spin();
 }
